@@ -36,3 +36,11 @@ aws_vpcのオプションでenable_dns_hostnamesの指定をtrueにする必要�
 
 https://www.khasegawa.net/posts/2017/10/public-dns-atatch-to-ec2-created/
 
+
+# 特定のリソースだけ更新
+
+`terraform plan -target {aws_resource}.{target}`
+
+# aws_security_group - ingressのfrom, toポートの関係性
+
+フォワーディングではなく、入ってくるポートの範囲。
