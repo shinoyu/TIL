@@ -44,3 +44,27 @@ https://www.khasegawa.net/posts/2017/10/public-dns-atatch-to-ec2-created/
 # aws_security_group - ingressのfrom, toポートの関係性
 
 フォワーディングではなく、入ってくるポートの範囲。
+
+# パスワードなどの秘匿情報の扱い
+
+結局stateに設定した情報が入ってしまうので、S3などに置くとして、
+terraform.tfvarsというterraform用の変数管理ファイルを用意して、それをgitにいれないように管理するのが良さそう。つまり結局は.envである。
+
+stateに記録したくないなど厳密にやりたい場合は、仮値で設定してstateにいれておき、後でaws cliで変更に行くのが良さげ。
+リソースを作った後、RDS設定にlifecycleを設定し、aws cliを浸かってパスワード上書きすればstateにも残らない。
+
+```
+# rds.tfに追加。terraformで管理しないパラメータであることを設定しておく
+lifecycle {
+  ignore_changes = [password]
+}
+```
+
+```
+# aws cliでパスワードの生成
+aws secretsmanager get-random-password --profile '{aws-profile}'--require-each-included-type
+
+# パスワードの設定
+aws rds modify-db-instance --db-instance_identifier '{rds-name}' --master-user-password '{password}'
+```
+
