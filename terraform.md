@@ -28,3 +28,11 @@ resource "aws_iam_instance_profile" "ec2" {
 ```
 iam_instance_profile = aws_iam_instance_profile.profile.name
 ```
+
+# EC2のパブリックDNSが設定されていない
+
+aws_instanceのパラメータとしては、public_dnsが該当。だけとこれは不要だった。サブネットから解決されている気がする。
+aws_vpcのオプションでenable_dns_hostnamesの指定をtrueにする必要がある。
+
+https://www.khasegawa.net/posts/2017/10/public-dns-atatch-to-ec2-created/
+
