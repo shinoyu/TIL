@@ -68,3 +68,16 @@ aws secretsmanager get-random-password --profile '{aws-profile}'--require-each-i
 aws rds modify-db-instance --db-instance_identifier '{rds-name}' --master-user-password '{password}'
 ```
 
+# 秘密鍵の設定
+
+ローカルで作って公開鍵をアップロードする方針で実施した。以下設定。
+
+```
+resource "aws_key_pair" "{key-name}" {
+  key_name = "{key_name}"
+  public_key = vars.public_key
+}
+
+resource "aws_instance" "{name}" {
+ key_name                    = "${aws_key_pair.{key-name}.key_name}"
+```
