@@ -23,3 +23,8 @@ resource "aws_iam_instance_profile" "ec2" {
   role = aws_iam_role.role.name
 }
 ```
+
+上記設定後、aws_instanceに以下を追加しておくと、インスタンスとiamの設定が紐付けられる
+```
+iam_instance_profile = aws_iam_instance_profile.profile.name
+```
