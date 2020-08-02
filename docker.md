@@ -26,7 +26,7 @@ NameがAlwaysになっていたら自動起動が有効になっている。
 ```
 
 
-以下で自動起動を停止できる。
+以下で自動起動を停止できる。(docker v1.11以降)
 ```
 docker update --restart=no {container} 
 ```
