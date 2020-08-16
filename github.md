@@ -4,3 +4,15 @@
 キーの作り方はユーザーの公開かぎ登録と同じもので問題なかった。
 
 作成した秘密鍵は、appサーバー増やすときに使い回すので、scpで取得して管理しておくこと。
+
+# Github Actions
+
+## use Repository Secrets
+
+```
+name: use secrets
+run: |
+  echo ${VALIABLE}
+env:
+  VALIABLE: ${{ secrets.VALIABLE }}
+```
