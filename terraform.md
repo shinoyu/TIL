@@ -81,3 +81,20 @@ resource "aws_key_pair" "{key-name}" {
 resource "aws_instance" "{name}" {
  key_name                    = "${aws_key_pair.{key-name}.key_name}"
 ```
+
+# iam_role_policyをどう管理するか
+
+大きく3つに分けて管理できると思われる。
+
+1. 直接ヒアドキュメントで書く
+2. data.aws_iam_role_policy_documentを使う
+3. file(policy.json)にする
+
+結論1で管理するのが良さそう。
+
+設定内容が完全に固定なら、3が一番管理しやすいと思われる。そのままAWSで設定するのと同じフォーマットで管理できるのでAWSに慣れ親しんだ人なら使える。  
+ただ、可変な文字列が入れられないため、Terraform側で作ったリソースと紐付ける情報が使えない。1を使った場合は可変の問題が解決できる。
+
+2を使うケース。Terraform書式に合わせてかけるので、Terraform慣れている人は統一感が出るこちらを使うのが良さそう。
+
+
