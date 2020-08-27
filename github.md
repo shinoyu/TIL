@@ -16,3 +16,19 @@ run: |
 env:
   VALIABLE: ${{ secrets.VALIABLE }}
 ```
+
+## use cache
+
+bundle installとかあの手のファイルを一時的に永続化できる仕組み？
+
+```
+steps:
+  - uses: action/cache@v2
+    with:
+      fetch-depth: 0
+      ref: {branch}
+```
+ケースによるが、だいたいdepth0で事足りるので、指定入れておく。
+refにブランチを入れる。
+
+他にも色々オプションがある。https://github.com/actions/checkout
