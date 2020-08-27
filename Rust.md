@@ -1,3 +1,18 @@
+# Syntax
+
+## options 
+
+引数に値を渡すと、その値を使い分けた列挙型を作れる。enumにGenerics入れてみたようなもの、これかなり強力では。
+```
+pub enum　Result<T, E> {
+  Ok(T),
+  Ng(E)
+}
+```
+OKの場合、T型の引数を要求できるようになる。NGの場合はE。それぞれ詰めたい物を可変にできるので、Stateみたいなものを用意して頑張らなくても良くなる。
+パターンマッチとの組み合わせが凶悪そう。
+
+
 # PapyrusというREPLを触ってみる
 https://github.com/kurtlawrence/papyrus
 
