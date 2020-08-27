@@ -32,3 +32,22 @@ steps:
 refにブランチを入れる。
 
 他にも色々オプションがある。https://github.com/actions/checkout
+
+## syntax
+
+### runs-onはJob個別に設定する
+
+jobsの直下に指定して、全部のジョブで同じコンテナ使いまわしたかったけどダメ
+```
+# NG
+jobs:
+  runs-on: ubuntu-latest
+  
+# OK
+jobs:
+  task:
+    runs-0n: ubuntu-latest
+```
+
+つまり、各処理毎の状態を持っていないと行けない場合は、1つのタスクの中で処理を完結させないと行けない。
+
