@@ -13,6 +13,34 @@ OKの場合、T型の引数を要求できるようになる。NGの場合はE�
 パターンマッチとの組み合わせが凶悪そう。
 
 
+# 気づき（後で整理するやつ)
+
+## グローバルなところで定義したenumは、std::{struct}::{Struct}のような名前空間に配置される模様
+`rustc 1.46.0 (04488afe3 2020-08-24)`
+
+```
+enum Result<T, E> {$
+  Ok(T),$
+  Err(E),$
+}$
+
+struct Context {$
+  val: i32,$
+  str: String,$
+}
+
+fn main() {
+  let result: std::result::Result<i32, ::std::string::String> = Ok(200);$
+  let val = Context{$
+    val: 100,$
+    str: "testa".to_string(),$
+  };
+}
+```
+
+Structで生成したものは、そのまま呼べる。Resultのenumは、std::result::Resultでないと利用できない。
+enumは定義先が違うんだろうか
+
 # PapyrusというREPLを触ってみる
 https://github.com/kurtlawrence/papyrus
 
