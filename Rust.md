@@ -39,7 +39,7 @@ fn main() {
 ```
 
 Structで生成したものは、そのまま呼べる。Resultのenumは、std::result::Resultでないと利用できない。
-enumは定義先が違うんだろうか
+enumは定義先が違うんだろうか。もう少し深堀りしたほうがいいかも。
 
 # PapyrusというREPLを触ってみる
 https://github.com/kurtlawrence/papyrus
