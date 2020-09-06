@@ -55,5 +55,10 @@ https://github.com/stripe/stripe-ruby
 ```
 Stripe.api_key = '{secret_key}'
 Stripe.log_level = Stripe::LEVEL_INFO
-
 ```
+
+# 実装時に参考になる情報
+
+https://qiita.com/y_toku/items/7bfa42793801dfc5415d
+
+ほぼこれ見れば解決する。
