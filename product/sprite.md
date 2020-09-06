@@ -23,7 +23,28 @@ Customは自ら必要なものを取捨選択していく。
 
 必要としている要件だと
 - ストアは自分でStripeのアカウントをつくらなくてよい
+
 の観点のため、Customを選択する必要がある。
+
+## Connectアカウントとcapability
+
+https://stripe.com/docs/connect/account-capabilities
+
+Connectアカウントの作成時に聞かれる設定。2020/09/06時点の日本をターゲットにしていて、出ている選択肢だと2つ
+
+- Transfers
+- Card payments
+
+### Transfers
+
+プラットフォームで集金して事業者に送金するケースで使う。
+UberEatsとかこのスキームな気がする。
+
+
+### Card pamynets
+
+カスタマーが事業者に支払いを直接するパターン。ECサイト等の手数料モデルを使っている場合だとこちらに該当する。
+
 
 # stripe SDK
 
