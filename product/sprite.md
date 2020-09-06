@@ -24,3 +24,15 @@ Customは自ら必要なものを取捨選択していく。
 必要としている要件だと
 - ストアは自分でStripeのアカウントをつくらなくてよい
 の観点のため、Customを選択する必要がある。
+
+# stripe SDK
+
+Rubyの場合はこれ。
+https://github.com/stripe/stripe-ruby
+
+起動時の設定をいれておく
+```
+Stripe.api_key = '{secret_key}'
+Stripe.log_level = Stripe::LEVEL_INFO
+
+```
