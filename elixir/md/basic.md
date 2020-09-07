@@ -1,5 +1,14 @@
 # 基本的な使い方
 
+## iex
+
+### 自作モジュールをロードする
+
+```
+iex> c("{file.path}")
+```
+
+
 ## debug print
 
 単に文字列ならIO.putsが使える。いわゆる普通のprint文。文字列以外を食わせるとArgumentError.  
