@@ -46,3 +46,14 @@ validate_secret_key_base': Missing `secret_key_base` for 'staging' environment, 
 結論、credentilas/:environment.yml.enc 側にsecret_key_baserというパラメータを追加する必要がある。master.keyと同様の値を設定しないと、キーの検証で弾かれる模様。
 
 development環境は上記がなくても動く。この挙動の違いに苦戦...
+
+# hashのキーはシンボルにしておくれ
+
+ということを守ってくれない人がいるときに使う技。
+ざんねんなことにハッシュの値を利用している側の実装が文字列前提で動いているのが確定的に明らかなので、文字列をシンボルにする過程でエラーとなり、背教者に「影響大きいのでシンボルにしません」とか言われがちになります。
+
+それを回避するために、シンボル化したところを`with_indifferent_access`とする。
+https://api.rubyonrails.org/classes/ActiveSupport/HashWithIndifferentAccess.html
+
+こうすることでシンボルでも文字列でもちゃんとアクセスできるようになり、エラーを回避できる。
+いい話。
