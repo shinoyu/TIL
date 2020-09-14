@@ -15,6 +15,14 @@ OKの場合、T型の引数を要求できるようになる。NGの場合はE�
 
 # 気づき（後で整理するやつ)
 
+## unwrap is 何？
+
+https://ja.stackoverflow.com/questions/1730/rust%E3%81%AEunwrap%E3%81%AF%E4%BD%95%E3%82%92%E3%81%99%E3%82%8B%E3%82%82%E3%81%AE%E3%81%A7%E3%81%99%E3%81%8B
+失敗可能性がある値を返す関数などはResult<T, E> みたいな形で、実際の戻り値とエラー値を返却してくるが、そこからTの実結果だけを引っ張る関数らしい。
+
+本来は値をmatchでいい感じに処理してあげることが推奨されるが、プロトタイプとかではunwrap()で対応するのが多いとのこと。
+
+
 ## fileをopenしても閉じなくていい(勝手に閉じてくれる)
 
 https://doc.rust-lang.org/std/fs/struct.File.html
