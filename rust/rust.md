@@ -15,6 +15,18 @@ OKの場合、T型の引数を要求できるようになる。NGの場合はE�
 
 # 気づき（後で整理するやつ)
 
+## fileをopenしても閉じなくていい(勝手に閉じてくれる)
+
+https://doc.rust-lang.org/std/fs/struct.File.html
+
+サンプルコードでopen周りの処理をみていたんだけど、fileをcloseする処理がどこにも書かれていない。
+
+https://www.reddit.com/r/rust/comments/38ka6i/how_to_close_a_file/
+とあり、変数がスコープから外れてdropする際に勝手に閉じてくれるらしい。  
+確かにfileという要素が予め分かっているのであればそう処理できそうではある。
+
+
+
 ## グローバルなところで定義したenumは、std::{enum}::{Enum}のような名前空間に配置される模様
 `rustc 1.46.0 (04488afe3 2020-08-24)`
 
