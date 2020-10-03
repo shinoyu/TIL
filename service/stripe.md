@@ -68,9 +68,16 @@ https://qiita.com/y_toku/items/7bfa42793801dfc5415d
 
 https://qiita.com/y_toku/items/7e51ef7e69d7cbbfb3ca
 
-
 Elementで生成したトークンを用いてCustomerオブジェクトを作成し、保存しておく。
 トークンをDB保持するイメージ
+
+このとき利用したトークンはあくまで登録までの一時情報で、カード情報を引くためのトークンではない。  実際、カード情報取得するAPIでは、トークンでではなくCustomerIDと、カードIDが要求される。
+
+Elementから受け取ったときに`Stripe::Customer.create`を実行する。このときのリクエストに`{source: token}`を積むと内部で`Stripe::Card.Create`を行ってくれるらしく、カード情報も一緒に生成してくれる。レスポンスに`default_source`パラメータが付与されて帰ってくるので、これをカードの問い合わせトークンとして保存しておく。
+
+https://stripe.com/docs/api/customers/create#create_customer-source
+
+
 
 ## 複数のカードを登録したときの挙動について
 
@@ -82,4 +89,5 @@ TODO
 Customerオブジェクトには、電話番号やメールアドレスといった連絡先情報を持っているものがある。
 サービス側のユーザー情報を変更する際、すでに決済手段が登録されているのであれば、この連絡先情報も更新してあげる必要がある。
 https://stripe.com/docs/api/customers/create
+
 
