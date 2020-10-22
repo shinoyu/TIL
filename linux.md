@@ -12,7 +12,7 @@ copytruncate
 delaycompress
 notifempty
 dateyesterday
-su xxx wheel
+su {user} wheel
 
 /var/www/app/log/app.log {
     ifempty
@@ -44,5 +44,23 @@ su xxx wheel
   - rotateの間隔。アプリケーションのログに対してやる場合はdailyがよさそう
 - rotate
   - いくつ残すか。
+- su
+  - rotateの実行ユーザーを指定する。
+  - `id -u -n`実行時のユーザー名とグループを指定しておく
 
+## 変更の反映
+
+設定値にエラーが無いかを確認。
+`logrotate -dv /etc/logrotate.conf`
+logrotate.confは中でlogrotate.dのincludeしているので、このファイルを指定してやるのが確実。
  
+このとき、以下のようなエラーが発生していないかチェックする
+```
+error: stat of /var/log/nginx/access.log failed: Permission denied
+considering log /var/log/nginx/error.log
+error: stat of /var/log/nginx/error.log failed: Permission denied
+```
+アクセス権限が不足していることで発生することが多い。該当のログのowner権限を確認し、それに合わせて`su`パラメータを設定すること
+
+`logrotate /etc/logrotate.conf`で反映
+
