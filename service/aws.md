@@ -7,3 +7,14 @@ https://pages.awscloud.com/rs/112-TZM-766/images/C2-07.pdf
 
 T系は安定したCPUを提供するより、バーストを使って処理量を増やす考え方。常に負荷が高いサーバーで利用するとCPUクレジットを使い果たして逆に詰まる。意識せず使うことを避けること。  
 開発環境、マイクロサービスでの利用が推奨されている。
+
+# private subnetにIGWを紐付けてNatゲートウェイ不要でoutboundできるらしい
+
+https://qiita.com/SSMU3/items/5ed5792e74266b54ff8b
+
+```
+インスタンスにグローバルIPを設定する必要がある
+```
+
+private subnetだけど実質public networkと一緒なのでは。セキュリティグループで対策はできるが、サーバー増えてきたときはかなりしんどい。
+やはり予めNat Gateway設定しておいた方が良さそう。
