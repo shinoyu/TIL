@@ -18,3 +18,14 @@ https://qiita.com/SSMU3/items/5ed5792e74266b54ff8b
 
 private subnetだけど実質public networkと一緒なのでは。セキュリティグループで対策はできるが、サーバー増えてきたときはかなりしんどい。
 やはり予めNat Gateway設定しておいた方が良さそう。
+
+
+# ACMパラメータ
+
+ACMをSDKで触るときに指定するオプション周りの整理
+
+name|param|-
+---|---|---
+idempotency_token| string | requestCertificationのときにユーザーが任意でつけられる名前。重複申請判定などで使えるかもしれない。
+certificate_authority_arn| arn | プライベート認証局のARN。いわゆるオレオレ証明書を作るときに使う。この指定がないとプライベート証明書が作れずパブリックとして作られてしまう。普通にAWSを運用している場合プライベートCAで証明書を発行する必要性はほとんどない？ので使うことはなさそう
+
