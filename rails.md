@@ -57,3 +57,13 @@ https://api.rubyonrails.org/classes/ActiveSupport/HashWithIndifferentAccess.html
 
 こうすることでシンボルでも文字列でもちゃんとアクセスできるようになり、エラーを回避できる。
 いい話。
+
+
+# Railsのautpload_paths
+
+
+一覧を確認したいとき
+```
+# for Zeitwerk
+puts ActiveSupport::Dependencies.autoload_paths
+```
