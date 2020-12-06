@@ -80,10 +80,19 @@ sudo hostnamectl set-hostname webserver.localdomain
 
 プログラム動かすグループと、操作ユーザーをBastion、対象サーバーともに作成する
 
-まず、グループを作成する
-次にユーザーを作成し、作成したグループに紐付ける
+```
+groupadd {group}
 
+# ユーザー作成
+sudo adduser {user}
+sudo su - {user}
+# 公開鍵の取り込み 
+curl -o ~/.ssh/authorized_keys --create-dirs https://github.com/{user}.keys
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
 
+sudo gpasswrd -a {user} {group}
+```
 
 ## InstanceConnectの設定
 
