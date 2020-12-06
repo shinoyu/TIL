@@ -81,6 +81,10 @@ sudo hostnamectl set-hostname webserver.localdomain
 プログラム動かすグループと、操作ユーザーをBastion、対象サーバーともに作成する
 
 ```
+# SSHでの公開鍵ログインを許可
+sed -i -e "s/#PubkeyAuthentication/PubkeyAuthentication/g" /etc/ssh/sshd_config
+sudo systemctl restart sshd.service
+
 groupadd {group}
 
 # ユーザー作成
@@ -90,8 +94,8 @@ sudo su - {user}
 curl -o ~/.ssh/authorized_keys --create-dirs https://github.com/{user}.keys
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
-
-sudo gpasswrd -a {user} {group}
+sudo usermod -aG wheel {user}
+sudo usermod -aG {group} {user}
 ```
 
 ## InstanceConnectの設定
