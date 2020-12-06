@@ -52,3 +52,20 @@ certificate_authority_arn| arn | プライベート認証局のARN。いわゆ�
   - 設定値は、EC2のコンソールで確認できるインスタンスのプライベートIP
 6. SSHでbastion.{domain}に入る
 7. bastion上からpingをプライベートホストゾーンに追加したFQDNで投げて疎通を確認
+
+
+## アクセスユーザーの作成
+
+プログラム動かすグループと、操作ユーザーをBastion、対象サーバーともに作成する
+
+まず、グループを作成する
+次にユーザーを作成し、作成したグループに紐付ける
+
+
+
+## InstanceConnectの設定
+
+
+
+
+## bastionのSSHポートの変更
