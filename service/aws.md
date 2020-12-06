@@ -32,26 +32,36 @@ certificate_authority_arn| arn | プライベート認証局のARN。いわゆ�
 
 # AWSでbastion環境を作る
 
-1. bastion接続用のセキュリティグループを作成する
+## 必要なセキュリティグループの作成
+
+1. bastion接続用のセキュリティグループを作成する。(bastion_sg)
   - inbound
      - 22: 0.0.0.0/0     # 一時的なSSHポート番号
      - {ポート}: 0.0.0.0/0  # 本来のSSHポート番号
-2. bastion接続先のセキュリティグループを作成する
+2. bastion接続先のセキュリティグループを作成する(bastion_accept_sg)
   - inbound
     - 22: 1で作成したセキュリティグループ
     - icmp: 1で作成したセキュリティグループ
-3. EC2でmicroなbastionサーバーを構築する。
-  - elastic ipを設定
-  - 1で作ったセキュリティグループをbastionに紐付け
-4. EC2でサーバーを構築する
-  - 2で作ったセキュリティグループを紐付け
-5. route53に各サーバーのFQDNを追加する
-  -パブリックホストゾーンに、bastion.{domain}をAレコードで追加する
-    - 設定値はbastionサーバーのelastic ipから払い出されたIPアドレス
-  - プライベートホストゾーンに、{任意}.{domain}をAレコードで追加する
-  - 設定値は、EC2のコンソールで確認できるインスタンスのプライベートIP
-6. SSHでbastion.{domain}に入る
-7. bastion上からpingをプライベートホストゾーンに追加したFQDNで投げて疎通を確認
+
+## インスタンス作成＋初期設定
+    
+EC2でmicroなbastionサーバーを構築する。
+- elastic ipを設定
+- bastion_sgを紐付ける
+
+EC2でアプリケーション動かすサーバーを構築する
+- bastion_accept_sgを紐付ける
+
+## ホスト名設定
+
+
+route53のパブリックホストゾーンに、bastion.{domain}をAレコードで追加する
+- 設定値はbastionサーバーのelastic ipから払い出されたIPアドレス
+
+プライベートホストゾーンに、{任意}.{domain}をAレコードで追加する
+- 設定値は、EC2のコンソールで確認できるインスタンスのプライベートIP
+
+SSHでbastion.{domain}に入り、bastion上からpingをプライベートホストゾーンに追加したFQDNで投げて疎通を確認する。
 
 
 ## アクセスユーザーの作成
