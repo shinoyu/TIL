@@ -83,9 +83,12 @@ sudo hostnamectl set-hostname webserver.localdomain
 ```
 # SSHでの公開鍵ログインを許可
 sed -i -e "s/#PubkeyAuthentication/PubkeyAuthentication/g" /etc/ssh/sshd_config
+sudo visudo
+> %wheel ALL=(ALL) NOPASSWD: ALL
 sudo systemctl restart sshd.service
 
-groupadd {group}
+
+sudo adduser {project_name}
 
 # ユーザー作成
 sudo adduser {user}
@@ -95,12 +98,7 @@ curl -o ~/.ssh/authorized_keys --create-dirs https://github.com/{user}.keys
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
 sudo usermod -aG wheel {user}
-sudo usermod -aG {group} {user}
 ```
-
-## InstanceConnectの設定
-
-
 
 
 ## bastionのSSHポートの変更
