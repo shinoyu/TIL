@@ -55,13 +55,25 @@ EC2でアプリケーション動かすサーバーを構築する
 ## ホスト名設定
 
 
-route53のパブリックホストゾーンに、bastion.{domain}をAレコードで追加する
+Route53のパブリックホストゾーンに、bastion.{domain}をAレコードで追加する
 - 設定値はbastionサーバーのelastic ipから払い出されたIPアドレス
 
 プライベートホストゾーンに、{任意}.{domain}をAレコードで追加する
 - 設定値は、EC2のコンソールで確認できるインスタンスのプライベートIP
 
 SSHでbastion.{domain}に入り、bastion上からpingをプライベートホストゾーンに追加したFQDNで投げて疎通を確認する。
+
+インスタンス自身のシステムホスト名も合わせておく(取り間違いを防ぐため）
+Route53のパブリックドメインの設定がある場合はFQDNで入れる。（bastionのみ該当)
+```
+sudo hostnamectl set-hostname webserver.mydomain.com
+```
+
+パブリックドメインの指定がない場合.localdomainにする
+
+```
+sudo hostnamectl set-hostname webserver.localdomain
+```
 
 
 ## アクセスユーザーの作成
