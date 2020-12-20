@@ -64,3 +64,18 @@ error: stat of /var/log/nginx/error.log failed: Permission denied
 
 `logrotate /etc/logrotate.conf`で反映
 
+
+# SSH
+
+## フォワーディング設定の踏み台にも鍵指定必要
+
+踏み台を使うシチュエーション。それぞれで鍵が設定されている場合、ProxyCommand側でも-iオプションを付けないと通らない
+
+local -> bastion -> server
+
+```
+ssh -i key -oProxyCommand='ssh -i key -W %h:%p bastion' server
+```
+
+普通に考えたら当たり前の話で、異なるキーを使う運用もあるため、当然それぞれで設定が必要になる。
+同じキーを使う場合でも暗黙的に読み替えてくれるわけではない。明示的に指定しておくこと。
