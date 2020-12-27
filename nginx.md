@@ -45,10 +45,30 @@ https://qiita.com/incog_neet/items/aea655f927da2063512d
 
 
 ALBを使っている場合、
-> Elastic Load Balancing は、クライアントとロードバランサーの間で使用されたプロトコルを X-Forwarded-Proto リクエストヘッダーに格納し、このヘッダーをサーバーに渡します。`
+> Elastic Load Balancing は、クライアントとロードバランサーの間で使用されたプロトコルを X-Forwarded-Proto リクエストヘッダーに格納し、このヘッダーをサーバーに渡します。
 
 https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/classic/x-forwarded-headers.html
 
 とある。そのため、$http_x_forwarded_protoを使えばALBから渡されたものをそのまま利用することができる。なので冒頭のケースではHTTPSとして処理される。
 よく$schemeが使われている例があるが、これはLBで受けたものがそのまま判断されるのでこの例ではHTTPになってしまう。なので、http_x_forwarded_protoを使う
 
+https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/classic/x-forwarded-headers.html
+
+
+# basic認証
+
+auth_basicパラメータを使う。
+
+```
+auth_basic "basic auth";
+auth_basic_user_file "/etc/nginx/auth.htpasswd";
+```      
+
+basic認証用ユーザーファイルを以下の手順で作成し、auth_basic_user_fileの設定値にパスを記載しておく。
+
+```
+htpasswd -c .htpasswd {user}
+
+New password： 
+```
+```
