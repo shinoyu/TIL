@@ -23,3 +23,12 @@ https://stackoverflow.com/a/1379630
 DBごとにルールが有るわけではなさそう。言語・フレームワークの文化によるものが大きいと思われる
 
 個人的な見解だけど、やはり~_at系で書いたほうがわかりやすい。ひと目でtimestampとわかる。日付にする場合は_onを推奨。現場によっては_dateにすることもある。その現場の方針次第でどうするかを考えればよさそう。
+
+# 最新のMySQLはデフォrでrootで動かせなくなった模様
+```
+Please read “Security” section of the manual to find out how to run mysqld as root!
+```
+https://dev.mysql.com/doc/refman/5.7/en/changing-mysql-user.html を見るとエラーの内容通りrootは推奨されていないらしい。
+MySQL8.0．22で観測。my.cnfでユーザー直指定書いてあげれば問題なく動くようなのでそれで回避する。
+
+https://qiita.com/yosida001/items/f7acb893843c550e0074
